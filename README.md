@@ -11,3 +11,13 @@ A [Vagrant](http://www.vagrantup.com/) plugin to install [Chef](http://www.opsco
 ``` bash
 vagrant plugin install vagrant-librarian-chef
 ```
+
+## Development
+
+``` bash
+bundle
+mkdir cookbooks
+bundle exec vagrant up
+```
+
+The cookbooks directory must be present or the Vagrantfile will fail to validate. It's not checked into version control because its contents (including any potential .gitkeep file) are removed by Librarian-Chef during its execution.
