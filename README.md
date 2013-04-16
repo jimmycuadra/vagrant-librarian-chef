@@ -4,7 +4,7 @@ A [Vagrant](http://www.vagrantup.com/) plugin to install [Chef](http://www.opsco
 
 ## Requirements
 
-* Vagrant version 1.1 or greater.
+* Vagrant version 1.2.0 or greater.
 
 ## Installation
 
@@ -20,11 +20,8 @@ Vagrant will automatically run Librarian-Chef before any provisioning step, so s
 
 ``` bash
 bundle
-mkdir cookbooks
 bundle exec vagrant up
 ```
-
-The cookbooks directory must be present or the Vagrantfile will fail to validate. It's not checked into version control because its contents (including any potential .gitkeep file) are removed by Librarian-Chef during its execution.
 
 ## Acknowledgements
 
