@@ -19,6 +19,25 @@ vagrant plugin install vagrant-librarian-chef
 Vagrant will automatically run Librarian-Chef before any provisioning step, so
 simply set up your Cheffile as you normally would.
 
+You may specify the subdirectory within which to run `librarian-chef`
+using the `librarian_chef.cheffile_dir` config key.  Please keep in mind
+that you will need to explicitly set the `cookbooks_path` in the
+`:chef_solo` provisioner:
+
+```ruby
+Vagrant.configure("2") do |config|
+
+  config.librarian_chef.cheffile_dir = "chef"
+
+  config.vm.provision :chef_solo do |chef|
+    chef.cookbooks_path = "chef/cookbooks"
+
+    ...
+
+  end
+end
+```
+
 ## Development
 
 ``` bash

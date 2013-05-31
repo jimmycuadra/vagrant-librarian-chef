@@ -16,6 +16,11 @@ DESC
       action_hook "librarian_chef" do |hook|
         hook.before Vagrant::Action::Builtin::Provision, Action::Install
       end
+
+      config "librarian_chef" do
+        require_relative "config"
+        Config
+      end
     end
   end
 end
