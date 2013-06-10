@@ -17,7 +17,7 @@ module VagrantPlugins
           if FileTest.exist? File.join(env[:root_path], config.cheffile_path)
             env[:ui].info "Installing Chef cookbooks with Librarian-Chef..."
             environment = Librarian::Chef::Environment.new({
-              :project_path => config.cheffile_dir
+              :project_path => File.join(env[:root_path], config.cheffile_dir)
             })
             Librarian::Action::Ensure.new(environment).run
             Librarian::Action::Resolve.new(environment).run
