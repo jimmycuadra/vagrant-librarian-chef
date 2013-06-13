@@ -8,7 +8,7 @@ module VagrantPlugins
       end
 
       def finalize!
-        @cheffile_dir = nil if @cheffile_dir == UNSET_VALUE
+        @cheffile_dir = "." if @cheffile_dir == UNSET_VALUE
       end
 
       def cheffile_path
