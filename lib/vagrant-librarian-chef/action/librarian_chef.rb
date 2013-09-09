@@ -31,10 +31,10 @@ module VagrantPlugins
 
         def get_project_path(env, config)
           # look for a Cheffile in the configured cheffile_dir
-          if FileTest.exist? config.cheffile_path
-            return config.cheffile_dir
-          elsif FileTest.exist? File.join(env[:root_path], config.cheffile_path)
+          if FileTest.exist? File.join(env[:root_path], config.cheffile_path)
             return File.join(env[:root_path], config.cheffile_dir)
+          elsif FileTest.exist? File.expand_path(config.cheffile_path)
+            return File.expand_path(config.cheffile_dir)
           end
         end
       end
