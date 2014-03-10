@@ -8,11 +8,11 @@ module VagrantPlugins
         def initialize(app, env)
           @app = app
           # Config#finalize! SHOULD be called automatically
-          env[:global_config].librarian_chef.finalize!
+          env[:machine].config.librarian_chef.finalize!
         end
 
         def call(env)
-          config = env[:global_config].librarian_chef
+          config = env[:machine].config.librarian_chef
 
           project_path = get_project_path(env, config)
           if project_path
