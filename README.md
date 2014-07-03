@@ -38,7 +38,11 @@ Vagrant.configure("2") do |config|
 end
 ```
 
+Librarian-Chef can be configured normally via configuration file at `.librarian/chef/config`. Again, if you change the path where cookbooks are installed by Librarian-Chef, make sure your Vagrantfile is updated to tell Vagrant's Chef provisioner where to look for them via the `cookbooks_path` attribute.
+
 ## Development
+
+Vagrant 1.5.0 or greater is required.
 
 ``` bash
 bundle
@@ -47,7 +51,7 @@ bundle exec vagrant up
 
 ## Acknowledgements
 
-Thank you to @thegcat and other contributors for their work on
+Thank you to [@thegcat](https://github.com/thegcat) and other contributors for their work on
 [vagrant-librarian](https://github.com/thegcat/vagrant-librarian), an earlier
 version of this functionality for Vagrant 1.0.x and the original Librarian gem
 with integrated Librarian-Chef.
