@@ -4,5 +4,8 @@ gemspec
 
 group :development do
   gem "vagrant", github: "mitchellh/vagrant"
-  gem "vagrant-vmware-fusion"
+end
+
+group :plugins do
+  gem "vagrant-omnibus"
 end
