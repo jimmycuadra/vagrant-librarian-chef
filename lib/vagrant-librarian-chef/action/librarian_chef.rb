@@ -12,24 +12,10 @@ module VagrantPlugins
         end
 
         def call(env)
-
           if librarian_chef_enabled?(env)
-            config = env[:machine].config.librarian_chef
-
-            project_path = get_project_path(env, config)
-            if project_path
-              env[:ui].info "Installing Chef cookbooks with Librarian-Chef..."
-              environment = Librarian::Chef::Environment.new({
-                :project_path => project_path
-              })
-              Librarian::Action::Ensure.new(environment).run
-              Librarian::Action::Resolve.new(environment).run
-              Librarian::Action::Install.new(environment).run
-            else
-              env[:ui].info "Couldn't find Cheffile at #{config.cheffile_path}."
-            end            
+            resolve_and_install_cookbooks(env)
           else
-             env[:ui].info "Librarian-Chef is disabled for this machine"
+            env[:ui].info "Librarian-Chef is disabled for this machine."
           end
           @app.call(env)
         end
@@ -50,6 +36,24 @@ module VagrantPlugins
         # @return [Boolean]
         def librarian_chef_enabled?(env)
           env[:machine].config.librarian_chef.enabled
+        end
+
+        private
+
+        def resolve_and_install_cookbooks(env)
+          config = env[:machine].config.librarian_chef
+          project_path = get_project_path(env, config)
+          if project_path
+            env[:ui].info "Installing Chef cookbooks with Librarian-Chef..."
+            environment = Librarian::Chef::Environment.new({
+              :project_path => project_path
+            })
+            Librarian::Action::Ensure.new(environment).run
+            Librarian::Action::Resolve.new(environment).run
+            Librarian::Action::Install.new(environment).run
+          else
+            env[:ui].info "Couldn't find Cheffile at #{config.cheffile_path}."
+          end
         end
       end
     end
