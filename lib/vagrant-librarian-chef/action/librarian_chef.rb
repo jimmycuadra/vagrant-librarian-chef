@@ -12,19 +12,24 @@ module VagrantPlugins
         end
 
         def call(env)
-          config = env[:machine].config.librarian_chef
 
-          project_path = get_project_path(env, config)
-          if project_path
-            env[:ui].info "Installing Chef cookbooks with Librarian-Chef..."
-            environment = Librarian::Chef::Environment.new({
-              :project_path => project_path
-            })
-            Librarian::Action::Ensure.new(environment).run
-            Librarian::Action::Resolve.new(environment).run
-            Librarian::Action::Install.new(environment).run
+          if librarian_chef_enabled?(env)
+            config = env[:machine].config.librarian_chef
+
+            project_path = get_project_path(env, config)
+            if project_path
+              env[:ui].info "Installing Chef cookbooks with Librarian-Chef..."
+              environment = Librarian::Chef::Environment.new({
+                :project_path => project_path
+              })
+              Librarian::Action::Ensure.new(environment).run
+              Librarian::Action::Resolve.new(environment).run
+              Librarian::Action::Install.new(environment).run
+            else
+              env[:ui].info "Couldn't find Cheffile at #{config.cheffile_path}."
+            end            
           else
-            env[:ui].info "Couldn't find Cheffile at #{config.cheffile_path}."
+             env[:ui].info "Librarian-Chef is disabled for this machine"
           end
           @app.call(env)
         end
@@ -36,6 +41,15 @@ module VagrantPlugins
           elsif FileTest.exist? File.expand_path(config.cheffile_path)
             return File.expand_path(config.cheffile_dir)
           end
+        end
+
+        # Determine if the Librarian-chef plugin should be run for the given environment
+        #
+        # @param [Vagrant::Environment] env
+        #
+        # @return [Boolean]
+        def librarian_chef_enabled?(env)
+          env[:machine].config.librarian_chef.enabled
         end
       end
     end
