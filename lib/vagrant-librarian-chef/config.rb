@@ -3,8 +3,13 @@ module VagrantPlugins
     class Config < Vagrant.plugin(2, :config)
       attr_accessor :cheffile_dir
 
+      # @return [Boolean]
+      #   disable of use Berks in Vagrant
+      attr_accessor :enabled
+
       def initialize
         @cheffile_dir = UNSET_VALUE
+        @enabled      = true
       end
 
       def finalize!
