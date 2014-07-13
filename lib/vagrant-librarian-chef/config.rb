@@ -1,10 +1,12 @@
 module VagrantPlugins
   module LibrarianChef
     class Config < Vagrant.plugin(2, :config)
+      # The path to the directory containing the Cheffile.
+      # @return [String] The path.
       attr_accessor :cheffile_dir
 
-      # @return [Boolean]
-      #   disable of use Berks in Vagrant
+      # Whether or not the plugin is enabled. If disabled, it will have no effect.
+      # @return [Boolean] The value of the enabled flag.
       attr_accessor :enabled
 
       def initialize
