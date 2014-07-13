@@ -40,6 +40,12 @@ end
 
 Librarian-Chef can be configured normally via configuration file at `.librarian/chef/config`. Again, if you change the path where cookbooks are installed by Librarian-Chef, make sure your Vagrantfile is updated to tell Vagrant's Chef provisioner where to look for them via the `cookbooks_path` attribute.
 
+If you want to programmtically disable the plugin without uninstalling it, set the `enabled` attribute to false:
+
+``` ruby
+config.librarian_chef.enabled = false
+```
+
 ## Development
 
 Vagrant 1.5.0 or greater is required.
