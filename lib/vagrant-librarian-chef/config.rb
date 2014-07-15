@@ -11,11 +11,12 @@ module VagrantPlugins
 
       def initialize
         @cheffile_dir = UNSET_VALUE
-        @enabled      = true
+        @enabled      = UNSET_VALUE
       end
 
       def finalize!
         @cheffile_dir = "." if @cheffile_dir == UNSET_VALUE
+        @enabled = true if @enabled == UNSET_VALUE
       end
 
       def cheffile_path
