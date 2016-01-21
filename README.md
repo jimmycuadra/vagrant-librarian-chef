@@ -1,5 +1,7 @@
 # vagrant-librarian-chef
 
+*WARNING: This project is no longer maintained. You should use [Berkshelf](http://berkshelf.com/) instead.*
+
 A [Vagrant](http://www.vagrantup.com/) plugin to install
 [Chef](http://www.opscode.com/chef/) cookbooks using
 [Librarian-Chef](https://github.com/applicationsonline/librarian-chef).
